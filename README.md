@@ -18,17 +18,16 @@ The files in this repository were used to configure the network depicted below.
 
 3. ELK Configuration
 
-		3.1 Beats in Use
+	3.1 Beats in Use
 
-		3.2 Machines Being Monitored
+	3.2 Machines Being Monitored
 
 4. How to Use the Ansible Build
 
 
 **Description of the Topology**
 
-The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
-Load Balancing ensures that the application will be highly responsive, in addition to restricting connection to the network. The advantage of a Jumpboxprovisioner is that restricts access and acts as a gateway for ssh connections in the live enviorment.
+The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.Load Balancing ensures that the application will be highly responsive, in addition to restricting connection to the network. The advantage of a Jumpboxprovisioner is that restricts access and acts as a gateway for ssh connections in the live enviorment.
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the CPU and system Logs.
 
 Filebeat is used for collecting log events of the server it is installed on._
@@ -38,53 +37,73 @@ The configuration details of each machine may be found below.
 
 
 
+|Name		     |Function		        |IP Address	|Operating System|
+|--------------------|--------------------------|---------------|----------------|
+|JumpBoxProvisioner  |Gateway		        |10.0.0.4	|Linux           |
+|                    |                          |               |                |
+|WEB-1		     |Redunant web server 1	|10.0.0.5	|Linux           |
+|                    |                          |               |                |
+|WEB-2		     |Redunant web server 2	|10.0.0.6	|Linux           |
+|                    |                          |               |                |
+|ELKVM               |Elk Stack	                |10.1.0.4	|Linux           |
 
+****Access Policies****
 
-
-Name	Function	IP Address	Operating System
-JumpBoxProvisioner	10.0.0.4	Linux
-WEB-1	Redunant web server 1	10.0.0.5	Linux
-WEB-2	Redunant web server 2	10.0.0.6	Linux
-ELKVM  STACK	10.1.0.4	Linux
-Access Policies
 The machines on the internal network are not exposed to the public Internet.
 
 Only the Load Balancer machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
 Port 80 (TCP over HTTP)
+
 Machines within the network can only be accessed by Ansible Container via the JumpBoxProvisioner using Port 22.
 
 JumpBoxProvisioner IP 10.0.0.4
-Name	Publicly Accessible	Allowed IP Addresses
-Jump Box	NO	10.0.0.4
-WEB_1	YES	10.0.0.8
-WEB_2	YES	10.0.0.9
-WEB_3	YES	10.0.0.5
-ELK	NO	10.1.0.4
-Elk Configuration
+
+|Name	            |Publicly Accessible| Allowed IP Addresses
+|-------------------|-------------------|---------------------------
+|Jumpboxprovisioner |     NO	        |   10.0.0.4
+|                   |                   |
+|WEB-1	            |     YES           |   10.0.0.8
+|                   |                   |
+|WEB-2	            |     YES	        |   10.0.0.9
+|	            |                   |
+|ELKvm	            |     NO	        |   10.1.0.4
+
+
+****Elk Configuration****
+
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
 
 The advantage of automating configurations with Ansible is efficint synchronicity in deployment across all systems
 The playbook implements the following tasks:
 
-Checks and installs Docker.io
-Checks and installs Python3-pip
-Checks and installs Docker Module (python)
-Checks and downloads, and run elk container with published ports
-Enable docker service on boot
-Increase virtual memory
+*Checks and installs Docker.io
+
+*Checks and installs Python3-pip
+
+*Checks and installs Docker Module (python)
+
+*Checks and downloads, and run elk container with published ports
+
+*Enable docker service on boot
+
+*Increase virtual memory
+
 The following screenshot displays the result of running docker ps after successfully configuring the ELK instance
 
-Elk-container-screenshot.png
+![image](https://user-images.githubusercontent.com/72707835/170845238-9569838a-cd72-44d2-824f-e6616d801fa5.png)
 
-Target Machines & Beats
+****Target Machines & Beats****
 This ELK server is configured to monitor the following machines:
 
-Name	Allowed IP Addresses
-WEB_1	10.0.0.8
-WEB_2	10.0.0.9
-WEB_3	10.0.0.5
-We have installed the following Beats on these machines:
+|Name	|Allowed IP Addresses|
+|-------|---------------------|
+|WEB_1	|10.0.0.5
+|       |
+|WEB_2	|10.0.0.6
+
+
+The following were installed  on these machines:
 
 Fileboat
 Metricbeat
@@ -103,8 +122,4 @@ Updated the hosts file to include the ELK-VM under the category elk
 
 nano /etc/ansible/hosts add [elk] and 10.1.0.4
 
-Run the playbook, and navigate to 20.242.81.178:5601 to check that the installation worked as expected.
 
-On CLI local host (if unix-based) open 20.242.81.178:5601
-
-As a Bonus, provide the specific commands the user will need to run to download the playbook, update the files, etc.
