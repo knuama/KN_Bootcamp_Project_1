@@ -1,11 +1,11 @@
 # KN_Bootcamp_Project_1
-BCS_Bootcamp_Project_1
+
 Week 13 Project 1 for Bootcamp
 
 Automated ELK Stack Deployment
 The files in this repository were used to configure the network depicted below.
 
-Project1_Diagram.png
+https://github.com/knuama/KN_Bootcamp_Project_1/blob/main/Diagrams/Project_Diagram.jpg
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the yaml_files file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -32,22 +32,19 @@ MetricBeat is Collects Operation System Metrics such as CPU load, Network Traffi
 The configuration details of each machine may be found below.
 
 Name	Function	IP Address	Operating System
-Jump Box	Gateway	10.0.0.4	Linux
-WEB_1	Redunant web server 1	10.0.0.8	Linux
-WEB_2	Redunant web server 2	10.0.0.9	Linux
-WEB_3	Redunant web server 3	10.0.0.5	Linux
-ELK	ELK STACK	10.1.0.4	Linux
+JumpBoxProvisioner	10.0.0.4	Linux
+WEB-1	Redunant web server 1	10.0.0.5	Linux
+WEB-2	Redunant web server 2	10.0.0.6	Linux
+ELKVM  STACK	10.1.0.4	Linux
 Access Policies
 The machines on the internal network are not exposed to the public Internet.
 
 Only the Load Balancer machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 
 Port 80 (TCP over HTTP)
-Machines within the network can only be accessed by Ansible Container via the JumpBox using Port 22.
+Machines within the network can only be accessed by Ansible Container via the JumpBoxProvisioner using Port 22.
 
-Jump Box IP 10.0.0.4
-A summary of the access policies in place can be found in the table below.
-
+JumpBoxProvisioner IP 10.0.0.4
 Name	Publicly Accessible	Allowed IP Addresses
 Jump Box	NO	10.0.0.4
 WEB_1	YES	10.0.0.8
